@@ -21,13 +21,19 @@ Notably, this application is built entirely from the ground up using **native co
 
 ### AI Communication Flow
 
+![AI Communication Flow](pictures/ai_communication_flow.jpg)
+
 This diagram illustrates how user messages are processed, dispatched to the AI, responses are received, and subsequently returned to the user interface. The flow incorporates robust input validation and mechanisms for handling request cancellations.
 
 ### Audio Transcript Flow
 
+![Audio Transcript Flow](pictures/audio_transcript_flow.jpg)
+
 This diagram outlines the comprehensive audio transcription process. It begins with audio input from the user, proceeds with transcription using Whisper AI, and then transmits the transcribed text to the AI model for further action.
 
 ### Memory System Flow
+
+![Memory System Flow](pictures/memory_system_flow.jpg)
 
 This diagram details how the memory system efficiently manages chat history. It intelligently checks for existing conversational context, integrates the three most recent chat histories along with any pinned topics into the current message, and forwards this enriched data to the AI proxy.
 
@@ -184,7 +190,6 @@ Make sure your `php.ini` includes:
 ```ini
 upload_max_filesize = 50M
 post_max_size = 50M
-extension=curl
 ```
 
 Also make sure `php-curl` is installed:
