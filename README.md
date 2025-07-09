@@ -214,6 +214,20 @@ Make sure your web server (e.g., **Nginx**) is properly serving both the public 
 
 You’re now ready to use **Alea's Intelligence** to interact with multiple AI models in a streamlined and dynamic environment!
 
+## Preview
+
+### Light Mode
+![UI/UX Preview](pictures/frontend_1.png)
+![UI/UX Preview](pictures/frontend_2.png)
+![UI/UX Preview](pictures/frontend_3.png)
+![UI/UX Preview](pictures/frontend_4.png)
+
+### Dark Mode
+![UI/UX Preview](pictures/frontend_dark1.png)
+![UI/UX Preview](pictures/frontend_dark2.png)
+![UI/UX Preview](pictures/frontend_dark3.png)
+![UI/UX Preview](pictures/frontend_dark4.png)
+
 ## Contributing
 
 This project is a labor of passion, shared with the community out of pure hobby interest. As such, there is currently no dedicated login portal implemented. If you are interested in contributing to this aspect or any other part of the project, your contributions are highly welcome!
