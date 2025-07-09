@@ -218,14 +218,20 @@ You’re now ready to use **Alea's Intelligence** to interact with multiple AI m
 
 ### Light Mode
 ![UI/UX Preview](pictures/frontend_1.png)
+
 ![UI/UX Preview](pictures/frontend_2.png)
+
 ![UI/UX Preview](pictures/frontend_3.png)
+
 ![UI/UX Preview](pictures/frontend_4.png)
 
 ### Dark Mode
 ![UI/UX Preview](pictures/frontend_dark1.png)
+
 ![UI/UX Preview](pictures/frontend_dark2.png)
+
 ![UI/UX Preview](pictures/frontend_dark3.png)
+
 ![UI/UX Preview](pictures/frontend_dark4.png)
 
 ## Contributing
