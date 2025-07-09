@@ -1,0 +1,188 @@
+body.dark {
+    --primary-color: #007bff;
+    --secondary-color: #a0aec0;
+    --background-color: #1a1e2b;
+    --surface-color: rgba(25, 29, 43);
+    --border-color: rgba(70, 70, 85, 0.7);
+    --text-color: #e0e0e0;
+    --highlight-text-color: #ffffff;
+    --loading-color: #adb5bd;
+    --active-status-color: #1cdf7e;
+    --inactive-status-color: #FF3B30;
+    --edit-button-bg: #1cdf7e;
+    --delete-button-bg: #FF3B30;
+    
+    background-color: var(--background-color);
+    backdrop-filter: blur(12px) brightness(50%) saturate(180%) hue-rotate(5deg);
+    -webkit-backdrop-filter: blur(12px) brightness(50%) saturate(180%) hue-rotate(5deg);
+    color: var(--secondary-color);
+    transition: background-color 0.5s ease, color 0.5s ease, backdrop-filter 0.5s ease;
+}
+
+/* Navbar color */
+body.dark .navbar {
+    background-color: var(--background-color);
+    border-bottom: 1px solid var(--border-color);
+}
+
+/* Header "Alea's Intelligence" */
+body.dark .nav-brand {
+    background-color: var(--surface-color);
+    color: var(--secondary-color);
+    box-shadow: var(--shadow-light), 0 var(--focus-shadow-offset-y) var(--focus-shadow-blur) var(--focus-shadow-spread) var(--focus-glow-color);
+}
+
+body.dark .section-container,
+body.dark .content-wrapper,
+body.dark .page-section {
+    background-color: transparent;
+}
+
+/* Header "AI Model" and "Configuration" */
+body.dark .heading h2 {
+    background-color: var(--surface-color);
+    color: var(--highlight-text-color);
+}
+
+body.dark .heading p {
+    color: var(--secondary-color);
+}
+
+/* Cards with surface-color */
+body.dark .model-card {
+    background-color: var(--surface-color);
+    box-shadow: var(--shadow-light);
+}
+
+body.dark .model-card h3 {
+    color: var(--highlight-text-color);
+}
+
+body.dark .model-card .provider {
+    color: var(--secondary-color);
+}
+
+body.dark .model-card .info-grid {
+    border-top: 1px solid var(--border-color);
+}
+
+body.dark .model-card .info-value {
+    color: var(--text-color);
+}
+
+body.dark .model-card .info-label {
+    color: var(--secondary-color);
+}
+
+/* Form with surface-color */
+body.dark .form-card {
+    background-color: var(--surface-color);
+    box-shadow: var(--shadow-medium);
+}
+
+body.dark .form-group label {
+    color: var(--highlight-text-color);
+}
+
+body.dark .form-group input[type="text"],
+body.dark .form-group input[type="url"] {
+    background-color: rgba(25, 29, 43, 0.5);
+    border: 1px solid var(--border-color);
+    color: var(--text-color);
+}
+
+body.dark .form-group input[type="text"]:focus,
+body.dark .form-group input[type="url"]:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px var(--focus-glow-color);
+}
+
+body.dark .form-group small {
+    color: var(--secondary-color);
+}
+
+body.dark .model-card .active-status {
+    color: var(--active-status-color);
+    font-weight: bold;
+}
+body.dark .model-card .inactive-status {
+    color: var(--inactive-status-color);
+    font-weight: bold;
+}
+
+/* Navigation button */
+body.dark .nav-links a {
+    color: var(--secondary-color);
+}
+
+body.dark .nav-links a.active {
+    color: var(--primary-color);
+}
+
+body.dark .nav-links a.active::after {
+    background-color: var(--primary-color);
+}
+
+/* Buttons */
+body.dark .btn-edit-card {
+    background-color: var(--edit-button-bg);
+}
+
+body.dark .btn-delete-card {
+    background-color: var(--delete-button-bg);
+}
+
+body.dark .btn-primary {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+body.dark .btn-secondary {
+    background-color: var(--secondary-color);
+    color: white;
+}
+
+/* Messages */
+body.dark .info-message {
+    color: var(--secondary-color);
+}
+
+/* Mobile Navigation */
+body.dark .mobile-nav-toggle {
+    color: var(--secondary-color);
+}
+
+body.dark .nav-links.show {
+    background-color: var(--surface-color);
+    box-shadow: var(--shadow-medium);
+}
+
+@media (hover: hover) and (pointer: fine) {
+    body.dark .model-card:hover {
+        box-shadow: var(--shadow-strong);
+    }
+
+    body.dark .nav-links a:hover {
+        color: var(--primary-color);
+    }
+
+    body.dark .btn-edit-card:hover {
+        background-color: #3f9043;
+    }
+
+    body.dark .btn-delete-card:hover {
+        background-color: #d12f27;
+    }
+
+    body.dark .btn-primary:hover {
+        background-color: #0056b3;
+    }
+
+    body.dark .btn-secondary:hover {
+        background-color: #5a6268;
+    }
+
+    body.dark .mobile-nav-toggle:hover {
+        background-color: rgba(25, 29, 43, 0.5);
+    }
+}

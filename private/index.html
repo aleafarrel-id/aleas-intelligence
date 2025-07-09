@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Dashboard</title>
+    <!--Stylesheet-->
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/style-dark.css">
+
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="icon" href="../public/assets/icon/favicon.png" type="image/png">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-brand">Alea's Intelligence</div>
+        <ul class="nav-links">
+            <li><a href="#view-models">Model</a></li>
+            <li><a href="#add-edit-model">Configuration</a></li>
+        </ul>
+
+        <!-- Dropdown -->
+        <div id="header-dropdown" class="header-dropdown">
+            <button id="settings-button" class="dropdown-button" title="Settings">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="3"></circle>
+                    <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+                </svg>
+                <span>Settings</span>
+            </button>
+            <button id="theme-toggle-button" class="dropdown-button" title="Switch to dark mode">
+                <!-- Toggle Icon -->
+                <svg id="moon-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                </svg>
+                <svg id="sun-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;">
+                    <circle cx="12" cy="12" r="5"></circle>
+                    <line x1="12" y1="1" x2="12" y2="3"></line>
+                    <line x1="12" y1="21" x2="12" y2="23"></line>
+                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                    <line x1="1" y1="12" x2="3" y2="12"></line>
+                    <line x1="21" y1="12" x2="23" y2="12"></line>
+                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                </svg>
+            </button>
+        </div>
+    </nav>
+
+    <div class="content-wrapper"> 
+        <section id="view-models" class="section-container page-section">
+            <div class="heading">
+                <h2>AI Model</h2>
+                <p>Model yang tersedia</p>
+            </div>
+
+            <div id="models-container" class="cards-grid">
+            </div>
+            <p id="loading-message" class="info-message" style="text-align: center;">Memuat...</p>
+            <p id="no-data-message" class="info-message" style="text-align: center; display: none;">Belum ada model</p>
+        </section>
+
+        <section id="add-edit-model" class="section-container page-section" inert>
+            <div class="heading">
+                <h2>Configuration</h2>
+                <p>Manage AI Model</p>
+            </div>
+            <form id="model-form" class="form-card">
+                <input type="hidden" id="model-id">
+                <div class="form-group">
+                    <label for="service-name">AI Model</label>
+                    <input type="text" id="service-name" name="serviceName" placeholder="Contoh: Gemini 2.5 Flash" required>
+                    <small>Nama yang akan ditampilkan</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="provider-name">Penyedia</label>
+                    <input type="text" id="provider-name" name="providerName" placeholder="Contoh: OpenAI, Google" required>
+                    <small>Nama penyedia layanan AI</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="model-name">Model (API)</label>
+                    <input type="text" id="model-name" name="modelName" placeholder="Contoh: deepseek/deepseek-r1-0528" required>
+                    <small>Nama model dalam API</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="api-key">API Key</label>
+                    <input type="text" id="api-key" name="apiKey" placeholder="API Key lengkap" required>
+                    <small>API Key</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="base-url">Base URL</label>
+                    <input type="text" id="base-url" name="baseUrl" placeholder="Contoh: https://api.openai.com/v1" required>
+                    <small>Base URL Penyedia API</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="is-active">Aktif</label>
+                    <input type="checkbox" id="is-active" name="isActive" checked>
+                    <small>Tandai jika model ini aktif</small>
+                </div>
+                
+                <button type="submit" class="btn btn-primary" id="save-model-btn">Simpan</button>
+                <button type="button" class="btn btn-secondary" id="cancel-edit-btn" style="display: none;">Batal</button>
+            </form>
+        </section>
+    </div>
+
+    <!-- Settings overlay -->
+    <div id="settings-overlay" class="settings-overlay">
+        <div class="settings-modal">
+            <button id="settings-close" class="settings-close-btn" title="Tutup">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-minimize-2">
+                    <polyline points="4 14 10 14 10 20"></polyline>
+                    <polyline points="20 10 14 10 14 4"></polyline>
+                    <line x1="14" y1="10" x2="21" y2="3"></line>
+                    <line x1="3" y1="21" x2="10" y2="14"></line>
+                </svg>
+            </button>
+            <span>Pengaturan</span>
+            
+            <div class="setting-item">
+                <label class="setting-label">Model AI</label>
+                <div class="delete-action">
+                    <p class="setting-description">Hapus semua model AI yang ada.</p>
+                    <button id="clear-history" class="btn-danger">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" 
+                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="3 6 5 6 21 6"></polyline>
+                            <path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"></path>
+                            <line x1="10" y1="11" x2="10" y2="17"></line>
+                            <line x1="14" y1="11" x2="14" y2="17"></line>
+                            <path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"></path>
+                        </svg>
+                        <span>Hapus</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="overlay-spacer"></div>
+            <div class="about-app">
+                <small>Alea's Intelligence v1.0</small>
+            </div>
+        </div>
+    </div>
+
+    <script src="assets/js/main.js"></script>
+</body>
+</html>

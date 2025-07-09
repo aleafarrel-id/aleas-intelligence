@@ -1,0 +1,1178 @@
+:root {
+    /* Color Palette */
+    --primary-color: #007bff; /* Main accent color, e.g., for buttons, active states */
+    --secondary-color: #6c757d; /* Secondary text/icon color */
+    --background-color: #f0f4f9; /* Overall page background */
+    --surface-color: #ffffff; /* Background for cards, input areas, bubbles */
+    --border-color: #e0e6ec; /* Border color for elements */
+    --text-color: #333; /* Default text color */
+    
+    /* Chat Bubble Colors */
+    --bubble-bg: #ffffff; /* Default chat bubble background */
+    --bubble-text: #333; /* Default chat bubble text color */
+
+    /* UI Component Colors */
+    --loading-color: #adb5bd; /* Color for loading indicators */
+    
+    /* Shadows */
+    --shadow-light: 0 2px 8px rgba(0, 0, 0, 0.08); /* Lighter shadow for subtle depth */
+    --shadow-medium: 0 5px 15px rgba(0, 0, 0, 0.1); /* Medium shadow for elevated elements */
+
+    /* Input Focus Glow Effect */
+    --focus-glow-color: rgba(0, 123, 255, 0.2); 
+    --focus-shadow-offset-y: 6px; 
+    --focus-shadow-blur: 16px; 
+    --focus-shadow-spread: -4px;
+}
+
+/* Clean highlight color for mobile */
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Base HTML & Body styles setup */
+html, body {
+    height: 100dvh; /* Full viewport height */
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: var(--background-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--text-color);
+    line-height: 1.5;
+    transition: background-color 0.5s ease, color 0.5s ease;
+}
+
+/* Main Layout Structure */
+.main-layout {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 12px;
+    box-sizing: border-box;
+}
+
+/* Application Header */
+.app-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 0;
+    margin-bottom: 12px;
+    color: var(--primary-color);
+    position: relative;
+}
+
+.app-header p {
+    font-size: .9em;
+    color: var(--secondary-color);
+    background-color: var(--bubble-bg);
+    border-radius: 20px;
+    margin: 0;
+    padding: 6px 18px;
+    box-shadow: 
+        var(--shadow-light), 
+        0 var(--focus-shadow-offset-y) var(--focus-shadow-blur) var(--focus-shadow-spread) var(--focus-glow-color);
+    cursor: pointer;
+    user-select: none;
+    transition: transform 0.2s ease;
+}
+
+.header-dropdown {
+    position: absolute;
+    top: calc(100% + 6px);
+    left: 50%;
+    transform: translateX(-50%) translateY(-10px); /* Start position */
+    background-color: var(--surface-color);
+    border-radius: 18px;
+    box-shadow: 
+        var(--shadow-light), 
+        0 var(--focus-shadow-offset-y) var(--focus-shadow-blur) var(--focus-shadow-spread) var(--focus-glow-color);
+    z-index: 30;
+    display: flex; /* Using flex for layout */
+    padding: 8px;
+    box-sizing: border-box;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s ease-out, transform 0.2s ease-out, visibility 0.2s ease-out; /* Animation transition */
+    width: auto;
+    min-width: 100px;
+}
+
+.header-dropdown.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(0); /* End position */
+}
+
+#settings-button {
+    gap: 6px;
+    font-size: .75em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.dropdown-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: 1px solid var(--border-color);
+    padding: 8px;
+    border-radius: 22px;
+    color: var(--secondary-color);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin: 0 5px;
+}
+
+/* Chat Display Area */
+.chat-display {
+    flex-grow: 1;
+    overflow-y: auto; /* Enables vertical scrolling */
+    overflow-x: hidden;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* Spacing between chat messages */
+    padding-bottom: 40px; /* Space for the input area */
+    background-color: transparent;
+}
+
+/* Scrollbar Styling for Chat Display */
+.chat-display::-webkit-scrollbar {
+    width: 4px;
+}
+.chat-display::-webkit-scrollbar-track {
+    background: transparent;
+    border-radius: 10px;
+}
+.chat-display::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+
+/* Chat Row Container */
+.chat-row {
+    display: flex;
+    max-width: 800px;
+    width: 100%;
+    align-items: flex-start;
+    gap: 10px; /* Space between avatar and bubble */
+}
+
+/* Specific alignment for user and AI messages */
+.user-chat-row {
+    justify-content: flex-end;
+    align-self: flex-end;
+}
+
+.ai-chat-row {
+    justify-content: flex-start;
+    align-self: flex-start;
+}
+
+/* Avatar Styling */
+.avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%; /* Circular avatar */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 600;
+    font-size: 1.1em;
+    color: white;
+    flex-shrink: 0; /* Prevents avatar from shrinking */
+    margin-top: 5px;
+}
+
+.ai-avatar {
+    background-color: var(--primary-color);
+    box-shadow: var(--shadow-medium);
+}
+
+/* New wrapper for AI message bubble and action buttons */
+.ai-content-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0;
+    flex-grow: 1;
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+    scrollbar-width: none;
+}
+
+/* Message Bubble Styling */
+.message-bubble {
+    padding: 12px 18px;
+    border-radius: 22px;
+    max-width: 100%;
+    width: fit-content;
+    word-wrap: break-word; /* Ensures long words break correctly */
+    box-shadow: var(--shadow-light);
+    font-size: 1.0em;
+    line-height: 1.5;
+    animation: fadeIn 0.3s ease-out; /* Fade-in animation for new messages */
+    background-color: var(--bubble-bg);
+    color: var(--bubble-text);
+    font-family: 'Arial', sans-serif;
+    /* Removed position relative and padding-bottom here as buttons are now external */
+}
+
+/* Specific bubble backgrounds for user and AI messages */
+.user-message, .ai-message {
+    background-color: var(--bubble-bg);
+    color: var(--bubble-text);
+    border-bottom-right-radius: 22px;
+    border-bottom-left-radius: 22px;
+}
+
+.message-bubble p {
+    margin: 0; /* Removes default paragraph margin inside bubbles */
+}
+
+/* Input Area */
+.input-area-container {
+    position: sticky; /* Keeps input area at the bottom */
+    bottom: 0;
+    width: 100%;
+    padding: 10px;
+    background-color: transparent;
+    border-top: 1px solid var(--border-color);
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    z-index: 10;
+}
+
+.input-area {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 700px;
+    background-color: var(--surface-color);
+    border-radius: 28px;
+    padding: 12px 15px;
+    box-shadow: var(--shadow-light);
+    border: 1px solid var(--border-color);
+    transition: box-shadow 0.3s ease; /* Smooth transition for focus effect */
+}
+
+.input-controls {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 6px;
+}
+
+/* Model Dropdown Styling */
+.model-dropdown-container {
+    position: relative;
+}
+
+.model-select-button {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    background: transparent;
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    padding: 6px 12px;
+    font-size: 0.8em;
+    color: var(--secondary-color);
+    cursor: pointer;
+    margin-left: 8px;
+    transition: background-color 0.2s ease;
+}
+
+.model-select-button.active {
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+}
+
+.model-dropdown-content {
+    display: none; /* Hidden by default */
+    position: absolute;
+    bottom: 100%; /* Positions dropdown above the button */
+    left: 0;
+    margin-bottom: 5px;
+    background-color: var(--surface-color);
+    min-width: 160px;
+    border-radius: 8px;
+    box-shadow: var(--shadow-medium);
+    z-index: 20;
+    overflow: hidden;
+}
+
+.model-dropdown-content.show {
+    display: block;
+    animation: fadeIn 0.2s ease-out; /* Fade-in animation for dropdown */
+}
+
+.model-dropdown-content a {
+    color: var(--text-color);
+    padding: 10px 15px;
+    text-decoration: none;
+    display: block;
+    font-size: 0.9em;
+    transition: background-color 0.2s;
+}
+
+.model-dropdown-content a.selected {
+    background-color: rgba(0, 123, 255, 0.15);
+    color: var(--primary-color);
+    font-weight: 500;
+}
+
+/* User Input Textarea */
+#user-input {
+    max-height: 26px; /* Initial height for single line */
+    padding: 6px 12px;
+    border: none;
+    outline: none;
+    font-family: 'Arial', sans-serif;
+    font-size: .9em;
+    line-height: 1.4;
+    resize: none; /* Disables manual resizing */
+    background-color: transparent;
+    color: var(--secondary-color);
+    overflow-y: auto; /* Enables scrolling for larger content */
+    border-radius: 16px;
+    transition: all 0.3s ease;
+}
+
+#user-input::placeholder {
+    font-family: 'Arial', sans-serif;
+    color: var(--secondary-color);
+    opacity: 0.7;
+}
+
+#user-input:focus {
+    max-height: 60px; /* Expands on focus */
+}
+
+/* Input Area Focus Effect */
+.input-area:focus-within {
+    box-shadow: 
+        var(--shadow-light), 
+        0 var(--focus-shadow-offset-y) var(--focus-shadow-blur) var(--focus-shadow-spread) var(--focus-glow-color); 
+}
+
+/* Textarea Scrollbar Styling */
+#user-input::-webkit-scrollbar {
+    width: 4px;
+}
+#user-input::-webkit-scrollbar-track {
+    background: transparent;
+}
+#user-input::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+
+/* Send Button Styling */
+#send-button {
+    width: 40px;
+    height: 40px;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 50%; /* Circular button */
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: var(--shadow-light);
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+    flex-shrink: 0;
+    margin-left: auto;
+}
+
+#send-button:active {
+    transform: translateY(0);
+    box-shadow: var(--shadow-light);
+}
+
+#send-button svg {
+    width: 20px;
+    height: 20px;
+    margin-top: 2px;
+    margin-right: 2px;
+}
+
+/* Action Buttons Container */
+.action-buttons {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+/* Microphone Button Styling */
+.mic-button {
+    width: 36px;
+    height: 36px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--secondary-color);
+    transition: all 0.3s ease;
+    padding: 0;
+    border-radius: 50%;
+}
+
+.mic-button.active {
+    color: var(--primary-color);
+    animation: pulse 1.5s infinite; /* Pulsing animation when active */
+}
+
+.mic-button svg {
+    width: 20px;
+    height: 20px;
+}
+
+/* Voice Recording UI Elements */
+.recording-bubble .wave-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 100px;
+    height: 30px;
+    padding: 5px;
+}
+
+.recording-bubble .wave-bar {
+    width: 8px;
+    min-height: 2px;
+    background-color: var(--primary-color);
+    border-radius: 3px;
+    transition: height 0.1s ease-out, background-color 0.2s ease;
+}
+
+/* Styles for send audio button under wave animation */
+.send-audio-button {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 18px;
+    padding: 6px 13px;
+    font-size: 0.8em;
+    cursor: pointer;
+    margin-top: 10px; /* Space from the wave animation */
+    align-self: center; /* Center the button within the flex container */
+    box-shadow: var(--shadow-light);
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.send-audio-button:active {
+    transform: translateY(0);
+}
+
+/* Adjust message-bubble to be a flex container for centering the button */
+.message-bubble.recording-bubble {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/* "Recognizing..." Status */
+.recognizing-message {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--secondary-color);
+    font-style: italic;
+}
+
+/* Adjust send button margin when other controls are present */
+#send-button {
+    margin-left: 0;
+}
+
+/* Loading Indicators */
+.loading-indicator {
+    font-style: italic;
+    color: var(--loading-color);
+    padding: 10px 15px;
+    border-radius: 18px;
+    background-color: var(--bubble-bg);
+    align-self: flex-start;
+    max-width: fit-content;
+    animation: pulse 1.5s infinite ease-in-out;
+}
+
+/* Pulse Animation Keyframes */
+@keyframes pulse {
+    0% { opacity: 0.7; }
+    50% { opacity: 1; }
+    100% { opacity: 0.7; }
+}
+
+.small-note {
+    font-size: 11px;
+    color: var(--secondary-color);
+    margin-top: 2px;
+    text-align: center;
+}
+
+/* AI Content Formatting (Markdown to HTML) */
+.ai-message-content {
+    line-height: 1.7;
+    font-size: 1em;
+    color: #333;
+}
+
+.ai-message-content strong {
+    font-weight: 600;
+    color: #1a1a1a;
+}
+
+.ai-message-content em {
+    font-style: italic;
+}
+
+/* Inline code styling */
+.ai-message-content code {
+    background-color: rgba(175, 184, 193, 0.2);
+    padding: 0.2em 0.4em;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    font-size: 0.9em;
+    white-space: pre-wrap;
+}
+
+/* Code block styling */
+.ai-message-content pre {
+    background-color: #f8f9fa;
+    border: 1px solid #e0e6ec;
+    border-radius: 8px;
+    padding: 12px;
+    overflow-x: auto; /* Enables horizontal scrolling for long code lines */
+    margin: 1em 0;
+    font-family: 'Courier New', monospace;
+    font-size: 0.9em;
+    line-height: 1.4;
+}
+
+.ai-message-content pre code {
+    background: none;
+    padding: 0;
+    border-radius: 0;
+    display: block;
+}
+
+/* Headings within AI content */
+.ai-message-content h1,
+.ai-message-content h2,
+.ai-message-content h3,
+.ai-message-content h4,
+.ai-message-content h5,
+.ai-message-content h6 {
+    font-weight: 700;
+    margin-top: 1.2em;
+    margin-bottom: 0.6em;
+    color: #222;
+}
+
+.ai-message-content h1 { font-size: 1.8em; }
+.ai-message-content h2 { font-size: 1.5em; }
+.ai-message-content h3 { font-size: 1.2em; }
+.ai-message-content h4 { font-size: 1em; }
+.ai-message-content h5 { font-size: 0.9em; }
+.ai-message-content h6 { font-size: 0.8em; }
+
+/* Lists within AI content */
+.ai-message-content ul,
+.ai-message-content ol {
+    padding-left: 20px;
+    margin-top: 0.6em;
+    margin-bottom: 0.6em;
+    list-style-position: outside;
+}
+
+.ai-message-content li {
+    margin-bottom: 0.2em;
+    line-height: 1.5;
+    padding-left: 0;
+}
+
+/* Remove excessive <br> tags around block elements to prevent unwanted spacing */
+.ai-message-content ul + br,
+.ai-message-content p + br,
+.ai-message-content ol + br,
+.ai-message-content pre + br,
+.ai-message-content h1 + br,
+.ai-message-content h2 + br,
+.ai-message-content h3 + br,
+.ai-message-content h4 + br,
+.ai-message-content h5 + br,
+.ai-message-content h6 + br {
+    display: none;
+}
+
+/* Ensure no consecutive <br> tags render */
+.ai-message-content br + br {
+    display: none;
+}
+
+/* AI Thinking/Loading Spinner */
+.loading-container {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0 4px;
+    color: var(--secondary-color);
+}
+
+.loading-spinner {
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    border: 3px solid rgba(0, 123, 255, 0.2);
+    border-radius: 50%;
+    border-top-color: var(--primary-color);
+    animation: spin 1s linear infinite; /* Rotation animation for spinner */
+}
+
+/* Spinner Rotation Animation Keyframes */
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+.thinking-text {
+    font-style: italic;
+    color: var(--secondary-color);
+}
+
+/* Code Block Container & Copy Button */
+.code-language-label {
+    background-color: #f1f3f5;
+    color: #555;
+    font-size: 0.8em;
+    font-family: 'Courier New', Courier, monospace;
+    padding: 5px 10px;
+    margin-bottom: -8px;
+    border-bottom: 1px solid #e0e6ec;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+}
+
+.code-block-container {
+    position: relative;
+    border-radius: 8px;
+    overflow: hidden;
+    margin: 10px 0;
+}
+
+.code-block-header {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 4px;
+    z-index: 10;
+}
+
+.copy-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.7;
+    transition: opacity 0.3s;
+}
+
+.copy-button svg {
+    width: 16px;
+    height: 16px;
+}
+
+/* Error Message Styling */
+.error-message,
+.error-message p {
+    margin-bottom: 0;
+    color: var(--secondary-color);
+    font-style: italic;
+}
+
+/* Table Styling within AI content */
+.table-container {
+    width: 100%;
+    overflow-x: auto; /* Enables horizontal scrolling for wide tables */
+    margin: 1em 0;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    scrollbar-width: none;
+}
+
+.table-container table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: white;
+}
+
+.table-container th {
+    background-color: #f8f9fa;
+    font-weight: 600;
+    padding: 10px 12px;
+    border-bottom: 2px solid var(--border-color);
+    text-align: left;
+}
+
+.table-container td {
+    padding: 8px 12px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.table-container tr:last-child td {
+    border-bottom: none; /* No border for the last row's cells */
+}
+
+/* Stop Button Style (when actively generating/recording) */
+#send-button.stop-button {
+    animation: pulse 1.5s infinite; /* Pulsing animation for stop button */
+}
+
+/* Gaya untuk kontainer tombol aksi AI */
+.ai-action-buttons {
+    display: flex;
+    gap: 3px; /* Jarak antar tombol */
+    margin-top: 10px; /* Jarak dari bubble pesan AI */
+    padding: 2px;
+}
+
+/* Gaya dasar untuk semua tombol aksi */
+.action-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 6px;
+    border-radius: 6px;
+    color: var(--secondary-color);
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.8;
+}
+
+.action-button svg {
+    width: 18px;
+    height: 18px;
+}
+
+/* Gaya khusus untuk tombol pin */
+.pin-button.pinned {
+    color: var(--primary-color); /* Warna saat dipin */
+    opacity: 1;
+}
+
+/* Gaya khusus untuk tombol copy pesan (non-code block) */
+.copy-message-button svg {
+    /* Menggunakan ikon copy yang sudah ada di script.js */
+    width: 18px;
+    height: 18px;
+}
+
+/* Gaya khusus untuk tombol expand pesan */
+.expand-message-button svg {
+    width: 18px;
+    height: 18px;
+}
+
+/* Overlay untuk menampilkan pesan dalam mode fullscreen */
+.message-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.message-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.overlay-content {
+    background-color: var(--surface-color);
+    border-radius: 12px;
+    width: 90%;
+    max-width: 800px;
+    max-height: 90vh;
+    overflow-y: auto;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
+    padding: 25px;
+    position: relative;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+}
+
+.overlay-content::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
+}
+
+.overlay-close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    color: var(--secondary-color);
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+}
+
+.overlay-close svg {
+    width: 20px;
+    height: 20px;
+}
+
+.overlay-content .ai-message-content {
+    font-size: 1.05em;
+    line-height: 1.8;
+}
+
+/* Settings overlay style */
+.settings-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.3);
+    backdrop-filter: blur(8px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 200;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+.settings-overlay.active {
+    opacity: 1;
+    transform: scale(1);
+    pointer-events: auto;
+}
+
+.settings-overlay span {
+    font-size: 1.2em;
+}
+
+.setting-label {
+    font-size: 1.1em;
+}
+
+.btn-danger {
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.8em;
+  transition: background-color 0.2s ease;
+}
+
+.settings-overlay button span {
+    margin-top: 1px;
+    font-size: 1em;
+}
+
+.settings-modal {
+    background: var(--surface-color);
+    border-radius: 18px;
+    padding: 28px;
+    width: 90%;
+    max-width: 600px;
+    box-shadow: var(--shadow-medium);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    font-family: inherit;
+    font-size: 0.95em;
+    color: var(--text-color);
+}
+
+.setting-item {
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+    margin-top: 15px;
+}
+
+.setting-description {
+    color: var(--secondary-color);
+    font-size: 0.9em;
+}
+
+.setting-item button{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100px;
+    gap: 6px;
+    font-size: 0.9em;
+}
+
+.setting-item button svg {
+    width: 16px;
+    height: 16px;
+    color: white;
+}
+
+.settings-close-btn {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 6px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.settings-close-btn svg {
+    width: 20px;
+    height: 20px;
+    color: var(--secondary-color);
+}
+
+.overlay-spacer {
+    flex-grow: 1;
+}
+
+.about-app {
+    text-align: center;
+    font-size: 0.9em;
+    color: var(--secondary-color);
+}
+
+/* Hover only for high precision pointer devices (Hover only on desktop) */
+@media (hover: hover) and (pointer: fine) {
+    .app-header p:hover {
+        transform: scale(1.02);
+    }
+
+    .dropdown-button:hover{
+        border: 1px solid var(--primary-color);
+        color: var(--primary-color);
+    }
+
+    .chat-display::-webkit-scrollbar-thumb:hover {
+        background: rgba(0, 0, 0, 0.2);
+    }
+
+    .model-select-button:hover {
+        background-color: rgba(0, 123, 255, 0.05);
+    }
+
+    .model-dropdown-content a:hover {
+        background-color: rgba(0, 123, 255, 0.1);
+    }
+
+    #user-input::-webkit-scrollbar-thumb:hover {
+        background: rgba(0, 0, 0, 0.2);
+    }
+
+    #send-button:hover {
+        background-color: #0056b3;
+        transform: translateY(-2px); /* Slight lift on hover */
+        box-shadow: 0 6px 15px rgba(0, 123, 255, 0.3);
+    }
+
+    .mic-button:hover {
+        background-color: rgba(0, 123, 255, 0.1);
+    }
+
+    .send-audio-button:hover {
+        background-color: #0056b3;
+        transform: translateY(-1px);
+    }
+
+    .copy-button:hover {
+        opacity: 1;
+        background: rgba(0, 0, 0, 0.1);
+    }
+
+    #send-button.stop-button:hover {
+        transform: scale(1.05);
+    }
+
+    .action-button:hover {
+        opacity: 1;
+        background-color: rgba(0, 123, 255, 0.1);
+        transform: translateY(-1px);
+    }
+
+    .overlay-close:hover,
+    .settings-close-btn:hover {
+        background-color: rgba(0, 0, 0, 0.1);
+        transform: scale(1.1);
+    }
+
+    .btn-danger:hover {
+        background-color: #c0392b;
+    }
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .main-layout {
+        padding: 15px;
+    }
+    .app-header p {
+        font-size: 1em;
+    }
+    .chat-display {
+        padding: 15px;
+        padding-bottom: 20px;
+    }
+    .chat-row {
+        max-width: 100%;
+    }
+    .input-controls {
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+    .model-dropdown-container {
+        flex: 1;
+        min-width: 120px;
+    }
+    .message-bubble {
+        padding: 10px 15px;
+        font-size: 0.95em;
+        max-width: calc(100%);
+        overflow-x: auto;
+        scrollbar-width: 0;
+    }
+    .avatar {
+        width: 28px;
+        height: 28px;
+        font-size: 1em;
+    }
+    .user-name { 
+        font-size: 0.9em;
+    }
+    .input-area-container {
+        padding: 15px;
+    }
+    .input-area {
+        max-width: 100%;
+        padding: 8px 12px;
+        gap: 10px;
+    }
+    #user-input {
+        font-size: 1em;
+        min-height: 20px;
+    }
+    #send-button {
+        width: 36px;
+        height: 36px;
+    }
+    #send-button svg {
+        width: 18px;
+        height: 18px;
+    }
+    .action-buttons{
+        gap: 8px;
+    }
+    .mic-button {
+        width: 32px;
+        height: 32px;
+    }
+    .mic-button svg {
+        width: 18px;
+        height: 18px;
+    }
+
+    /* Responsive adjustment for overlay */
+    .overlay-content {
+        width: 95%;
+        max-height: 80vh;
+        padding: 34px 20px;
+        margin: 10% auto;
+        border-radius: 16px;
+        font-size: 0.9em;
+    }
+    
+    .overlay-close {
+        top: 7px;
+        right: 8px;
+        padding: 8px;
+        z-index: 10;
+    }
+    
+    .overlay-close svg {
+        width: 16px;
+        height: 16px;
+    }
+}
+
+/* Responsive design for small devices */
+@media only screen and (max-width: 425px) {
+    .main-layout {
+        padding: 6px 4px;
+    }
+    .app-header {
+        margin-bottom: 6px;
+    }
+    .message-bubble {
+        max-width: 100%;
+        word-break: break-word;
+    }
+    .table-container {
+        word-break: normal;
+    }
+    .ai-content-wrapper {
+        overflow-x: auto;
+    }
+    .small-note {
+        margin-top: -2px;
+        margin-bottom: 2px;
+    }
+}

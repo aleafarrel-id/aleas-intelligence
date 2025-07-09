@@ -1,0 +1,181 @@
+/* Color Variables for Dark Mode */
+body.dark {
+    --primary-color: #007bff;
+    --secondary-color: #a0aec0;
+    --background-color: #1a1e2b;
+    --surface-color: rgba(25, 29, 43);
+    --bubble-bg: rgba(35, 39, 53, 0.9);
+    --border-color: rgba(70, 70, 85, 0.7);
+    --text-color: #e0e0e0;
+    --highlight-text-color: #ffffff;
+    /* Ensure user bubble text overrides default */
+    --bubble-text: var(--highlight-text-color);
+
+    background-color: var(--background-color);
+    backdrop-filter: blur(12px) brightness(50%) saturate(180%) hue-rotate(5deg);
+    -webkit-backdrop-filter: blur(12px) brightness(50%) saturate(180%) hue-rotate(5deg);
+    scroll-behavior: smooth;
+    transition: background-color 0.5s ease, color 0.5s ease, backdrop-filter 0.5s ease;
+}
+
+/* Header */
+body.dark .app-header p {
+    color: var(--secondary-color);
+    background-color: var(--bubble-bg);
+    box-shadow: var(--shadow-light), 0 var(--focus-shadow-offset-y) var(--focus-shadow-blur) var(--focus-shadow-spread) var(--focus-glow-color);
+}
+
+/* Chat Display Background */
+body.dark .chat-display {
+    background-color: transparent;
+}
+body.dark .chat-display::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+/* Chat Bubbles */
+body.dark .user-message .message-bubble,
+body.dark .ai-message .message-bubble {
+    background-color: var(--bubble-bg);
+    color: var(--bubble-text);
+    border-radius: 22px;
+    box-shadow: var(--shadow-light);
+}
+
+/* Input Area */
+body.dark .input-area-container {
+    background-color: transparent;
+    border-top: 1px solid var(--border-color);
+}
+body.dark .input-area {
+    background-color: var(--surface-color);
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow-medium);
+}
+body.dark .input-area:focus-within {
+    box-shadow: var(--shadow-light), 0 var(--focus-shadow-offset-y) var(--focus-shadow-blur) var(--focus-shadow-spread) var(--focus-glow-color);
+}
+
+/* Buttons and Controls */
+body.dark .model-select-button {
+    background-color: transparent;
+    transition: background-color 0.2s ease;
+}
+body.dark .model-dropdown-content {
+    background-color: var(--surface-color);
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow-medium);
+    color: var(--secondary-color);
+    transition: background-color 0.2s ease;
+}
+body.dark .model-select-button.active {
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+}
+body.dark .model-dropdown-content a,
+body.dark .model-dropdown-content a.selected {
+    color: var(--text-color);
+}
+body.dark .model-dropdown-content a.selected {
+    background-color: rgba(0, 123, 255, 0.15);
+}
+
+/* Inputs */
+body.dark #user-input {
+    background-color: transparent;
+    color: var(--text-color);
+}
+body.dark #user-input::placeholder {
+    color: var(--secondary-color);
+}
+body.dark #user-input::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+/* Send & Audio Buttons */
+body.dark #send-button,
+body.dark .send-audio-button {
+    background-color: var(--primary-color);
+    color: #ffffff;
+    box-shadow: var(--shadow-light);
+}
+
+/* Loading Indicator */
+body.dark .loading-indicator {
+    background-color: var(--bubble-bg);
+    color: var(--loading-color);
+}
+
+/* Markdown & Code Blocks */
+body.dark .ai-message-content {
+    color: var(--text-color);
+}
+body.dark .ai-message-content strong {
+    color: var(--highlight-text-color);
+}
+body.dark .ai-message-content pre,
+body.dark .code-language-label {
+    background-color: transparent;
+    color: var(--highlight-text-color);
+    border: 2px solid var(--border-color);
+}
+
+body.dark .copy-button svg {
+    color: var(--highlight-text-color);
+}
+
+body.dark h1,
+body.dark h2,
+body.dark h3,
+body.dark h4,
+body.dark h5,
+body.dark h6 {
+    color: var(--highlight-text-color);
+}
+
+/* Tables */
+body.dark .table-container,
+body.dark .table-container th,
+body.dark .table-container td {
+    border: 1px solid var(--border-color);
+}
+body.dark .table-container table {
+    background-color: var(--surface-color);
+}
+body.dark .table-container th {
+    background-color: rgba(20, 20, 30, 0.7);
+    color: var(--text-color);
+}
+body.dark .table-container td {
+    color: var(--text-color);
+}
+
+/* Overlays */
+body.dark .message-overlay {
+    background-color: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(12px);
+}
+body.dark .overlay-content {
+    background-color: var(--surface-color);
+    box-shadow: var(--shadow-medium);
+}
+
+/* Hover Effects */
+@media (hover: hover) and (pointer: fine) {
+    body.dark .chat-display::-webkit-scrollbar-thumb:hover {
+        background: rgba(255, 255, 255, 0.3);
+    }
+    body.dark .model-select-button:hover,
+    body.dark .mic-button:hover,
+    body.dark .send-audio-button:hover {
+        background-color: rgba(0, 123, 255, 0.1);
+    }
+    body.dark #send-button:hover,
+    body.dark .send-audio-button:hover {
+        background-color: #0056b3;
+    }
+    body.dark .overlay-close:hover,
+    body.dark .settings-close-btn:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+    }
+}
