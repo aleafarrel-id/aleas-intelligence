@@ -37,9 +37,14 @@ This diagram outlines the comprehensive audio transcription process. It begins w
 
 This diagram details how the memory system efficiently manages chat history. It intelligently checks for existing conversational context, integrates the three most recent chat histories along with any pinned topics into the current message, and forwards this enriched data to the AI proxy.
 
+---
+
 ## System Requirements
 
-This project is built upon a **LEMPP stack** (Linux, Nginx, MySQL, PHP, PHPMyAdmin) to ensure optimal functionality and performance.
+- This project is built upon a **LEMPP stack** (Linux, Nginx, MySQL, PHP, PHPMyAdmin) to ensure optimal functionality and performance.
+- Whisper AI enables audio transcription (speech-to-text) from user input. However, the application remains fully functional without voice recognition.
+
+---
 
 ### Web Server Configuration (Nginx)
 
@@ -63,6 +68,8 @@ This project is built upon a **LEMPP stack** (Linux, Nginx, MySQL, PHP, PHPMyAdm
   Designated as the default database for the project, centralizing data storage.
 
 - Installation of **phpMyAdmin** is highly recommended for efficient and user-friendly database management.
+
+---
 
 ## Whisper AI Installation
 
@@ -126,6 +133,8 @@ sudo chmod -R 755 aleas-intelligence
 
 Upon completing the installation, install the base Whisper AI model and verify its functionality by transcribing an audio file into text before integrating it into the main application.
 
+---
+
 ## Usage
 
 To set up and run **Alea's Intelligence**, follow these steps:
@@ -139,6 +148,8 @@ Clone or copy this repository into your web server's root directory, commonly:
 ```
 
 Make sure the directory structure remains intact, especially the separation between public and private folders.
+
+**After placing the repository in your web server directory, configure the connect.php file with your database credentials to enable data connectivity.**
 
 ### 2. Set Proper Permissions
 
@@ -233,6 +244,8 @@ You’re now ready to use **Alea's Intelligence** to interact with multiple AI m
 ![UI/UX Preview](pictures/frontend_dark3.png)
 
 ![UI/UX Preview](pictures/frontend_dark4.png)
+
+---
 
 ## Contributing
 
