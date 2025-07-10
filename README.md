@@ -133,6 +133,12 @@ sudo chmod -R 755 aleas-intelligence
 
 Upon completing the installation, install the base Whisper AI model and verify its functionality by transcribing an audio file into text before integrating it into the main application.
 
+There are five models that can be installed: tiny, base, small, medium and large
+
+```bash
+whisper your-audio.mp3 --model base --language Indonesian --task transcribe --output_format txt
+```
+
 ---
 
 ## Usage
@@ -208,8 +214,11 @@ Also make sure `php-curl` is installed:
 ```bash
 sudo apt install php-curl
 ```
+### 6. Configure Whisper AI
 
-### 6. Start Using the Application
+Once Whisper AI is installed, configure the **voice_recognizer.php** file by adjusting it to match the **installation path** and the **model** used.
+
+### 7. Start Using the Application
 
 Navigate to your **public folder** (e.g., `http://yourdomain.com/`) to interact with the AI system. You can:
 
