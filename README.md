@@ -41,8 +41,8 @@ This diagram details how the memory system efficiently manages chat history. It 
 
 ## System Requirements
 
-- This project is built upon a **LEMPP stack** (Linux, Nginx, MySQL, PHP, PHPMyAdmin) to ensure optimal functionality and performance.
-- Whisper AI enables audio transcription (speech-to-text) from user input. However, the application remains fully functional without voice recognition.
+![Static Badge](https://img.shields.io/badge/LEMPP-Linux%20Nginx%20MySQL%20PHP%20PhpMyAdmin-orange)
+![Static Badge](https://img.shields.io/badge/Whisper%20AI-Voice%20Recognizer-blue)
 
 ---
 
